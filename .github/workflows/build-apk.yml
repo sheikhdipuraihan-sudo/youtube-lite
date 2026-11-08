@@ -33,6 +33,7 @@ jobs:
         run: /tmp/apktool b build/decoded --output build/youtube-lite-unsigned.apk
       - name: Align and sign release APK with temporary key
         run: |
+          export PATH="${ANDROID_HOME}/build-tools/35.0.0:${PATH}"
           zipalign -f -p 4 build/youtube-lite-unsigned.apk build/youtube-lite-release-aligned.apk
           keytool -genkeypair -v -keystore build/temporary-release.keystore \
             -storepass temporary-release -alias youtube-lite-release \
